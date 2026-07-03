@@ -44,6 +44,8 @@ class RiskConfig:
     daily_loss_limit: int = 3
     sl_atr_multiplier: float = 0.2
     take_profit_r_multiple: float = 2.0
+    fee_pct: float = 0.05      # per-side taker fee, e.g. 0.05% = 0.0005
+    slippage_pct: float = 0.02  # per-side estimated slippage, e.g. 0.02%
 
 
 @dataclass
