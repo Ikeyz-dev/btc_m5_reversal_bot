@@ -35,6 +35,7 @@ class StrategyConfig:
     stoch_oversold: float = 20.0
     stoch_overbought: float = 80.0
     adx_threshold: float = 25.0
+    adx_threshold_max: float = 40.0   # skip trades above this — see backtest findings
 
 
 @dataclass
