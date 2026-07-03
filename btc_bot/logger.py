@@ -90,5 +90,11 @@ class TradeLogger:
                 profit=profit,
                 r_multiple=row["r_multiple"],
                 reason_for_exit=row["reason"],
+                stoch_k=row.get("stoch_k"),
+                stoch_d=row.get("stoch_d"),
+                adx=row.get("adx"),
+                atr=row.get("atr"),
+                swing_low=row.get("swing_low"),
+                swing_high=row.get("swing_high"),
             )
             self.log_trade(entry)
