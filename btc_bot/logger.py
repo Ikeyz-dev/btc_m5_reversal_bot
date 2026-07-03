@@ -22,6 +22,12 @@ CSV_FIELDS = [
     "profit",
     "r_multiple",
     "reason_for_exit",
+    "stoch_k",
+    "stoch_d",
+    "adx",
+    "atr",
+    "swing_low",
+    "swing_high",
 ]
 
 
