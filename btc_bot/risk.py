@@ -31,11 +31,18 @@ def calculate_stop_loss(
 ) -> Optional[float]:
     """
     Calculate the stop loss price for a trade, enforcing a minimum
-    distance of `min_sl_atr_multiple * ATR` so degenerate near-zero
-    stops (when the swing point sits very close to entry) can't occur.
+    distance that is the LARGER of:
+      - min_sl_atr_multiple * ATR (adapts to recent volatility)
+      - min_sl_pct * entry_price (a hard floor for quiet periods when
+        ATR itself is too small to produce a realistically tradeable
+        stop — e.g. 0.02% ATR-based stops that are tighter than
+        typical spread + fees).
     """
     cfg = cfg or RiskConfig()
-    min_distance = cfg.min_sl_atr_multiple * atr
+    min_distance = max(
+        cfg.min_sl_atr_multiple * atr,
+        cfg.min_sl_pct / 100.0 * entry_price,
+    )
 
     if direction == "BUY":
         if last_swing_low is None:
@@ -54,7 +61,6 @@ def calculate_stop_loss(
         return sl
 
     raise ValueError(f"Unknown direction: {direction}")
-
 
 def calculate_take_profit(
     direction: Direction,
