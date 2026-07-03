@@ -1,0 +1,8 @@
+pandas>=2.0
+numpy>=1.24
+matplotlib>=3.7
+ta>=0.11
+ccxt>=4.0
+
+# Only needed for Phase 12 live trading against Exness (Windows only):
+# MetaTrader5>=5.0
