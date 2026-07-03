@@ -74,6 +74,8 @@ def backtest(df: pd.DataFrame, cfg: BotConfig = None) -> pd.DataFrame:
             entry_price=entry_price,
             stop_loss=stop_loss,
             take_profit=take_profit,
+            fee_pct=cfg.risk.fee_pct,
+            slippage_pct=cfg.risk.slippage_pct,
         )
 
         if result is None:
