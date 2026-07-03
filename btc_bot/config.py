@@ -48,6 +48,7 @@ class RiskConfig:
     fee_pct: float = 0.05      # per-side taker fee, e.g. 0.05% = 0.0005
     slippage_pct: float = 0.02  # per-side estimated slippage, e.g. 0.02%
     min_sl_atr_multiple: float = 0.5  # never let SL be tighter than this many ATRs
+    min_sl_pct: float = 0.15  # SL can never be tighter than this % of entry price
 
 @dataclass
 class BotConfig:
