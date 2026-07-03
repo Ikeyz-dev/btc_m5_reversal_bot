@@ -13,7 +13,7 @@ class DataConfig:
     exchange_id: str = "binance"
     symbol: str = "BTC/USDT"
     timeframe: str = "5m"
-    candles_to_fetch: int = 5000  # supports "thousands of candles"
+    candles_to_fetch: int = 100000  # supports "thousands of candles"
 
 
 @dataclass
@@ -47,7 +47,7 @@ class RiskConfig:
     take_profit_r_multiple: float = 2.0
     fee_pct: float = 0.05      # per-side taker fee, e.g. 0.05% = 0.0005
     slippage_pct: float = 0.02  # per-side estimated slippage, e.g. 0.02%
-
+    min_sl_atr_multiple: float = 0.5  # never let SL be tighter than this many ATRs
 
 @dataclass
 class BotConfig:
