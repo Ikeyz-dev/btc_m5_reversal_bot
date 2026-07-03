@@ -43,6 +43,12 @@ class TradeLogEntry:
     profit: float
     r_multiple: float
     reason_for_exit: str
+    stoch_k: float = None
+    stoch_d: float = None
+    adx: float = None
+    atr: float = None
+    swing_low: float = None
+    swing_high: float = None
 
 
 class TradeLogger:
