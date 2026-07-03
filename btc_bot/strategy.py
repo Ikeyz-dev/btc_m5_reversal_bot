@@ -84,7 +84,7 @@ def sell_signal(df: pd.DataFrame, i: int, cfg: StrategyConfig = None) -> bool:
         return False
 
     stoch_ok = (k1 > cfg.stoch_overbought) and (k0 < k1)
-    adx_ok = (adx2 < adx1) and (adx0 < adx1) and (adx1 > cfg.adx_threshold)
+    adx_ok = (adx2 < adx1) and (adx0 < adx1) and (cfg.adx_threshold < adx1 <= cfg.adx_threshold_max)
     ha_ok = bool(ha1_bear) and bool(ha0_bear)
 
     return bool(stoch_ok and adx_ok and ha_ok)
