@@ -30,22 +30,28 @@ def calculate_stop_loss(
     cfg: RiskConfig = None,
 ) -> Optional[float]:
     """
-    Calculate the stop loss price for a trade.
-
-    Returns None if the required swing point isn't available yet
-    (e.g. at the very start of a dataset).
+    Calculate the stop loss price for a trade, enforcing a minimum
+    distance of `min_sl_atr_multiple * ATR` so degenerate near-zero
+    stops (when the swing point sits very close to entry) can't occur.
     """
     cfg = cfg or RiskConfig()
+    min_distance = cfg.min_sl_atr_multiple * atr
 
     if direction == "BUY":
         if last_swing_low is None:
             return None
-        return last_swing_low - cfg.sl_atr_multiplier * atr
+        sl = last_swing_low - cfg.sl_atr_multiplier * atr
+        if entry_price - sl < min_distance:
+            sl = entry_price - min_distance
+        return sl
 
     if direction == "SELL":
         if last_swing_high is None:
             return None
-        return last_swing_high + cfg.sl_atr_multiplier * atr
+        sl = last_swing_high + cfg.sl_atr_multiplier * atr
+        if sl - entry_price < min_distance:
+            sl = entry_price + min_distance
+        return sl
 
     raise ValueError(f"Unknown direction: {direction}")
 
