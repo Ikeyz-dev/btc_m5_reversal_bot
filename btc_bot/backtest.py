@@ -95,6 +95,13 @@ def backtest(df: pd.DataFrame, cfg: BotConfig = None) -> pd.DataFrame:
                 "result": result.result,
                 "r_multiple": result.r_multiple,
                 "reason": result.reason,
+                # Indicator snapshot at the signal candle (row_signal_idx)
+                "stoch_k": float(df["Stoch_K"].iloc[row_signal_idx]),
+                "stoch_d": float(df["Stoch_D"].iloc[row_signal_idx]),
+                "adx": float(df["ADX"].iloc[row_signal_idx]),
+                "atr": atr,
+                "swing_low": swing_low,
+                "swing_high": swing_high,
             }
         )
 
