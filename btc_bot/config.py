@@ -45,8 +45,8 @@ class RiskConfig:
     daily_loss_limit: int = 3
     sl_atr_multiplier: float = 0.2
     take_profit_r_multiple: float = 2.0
-    fee_pct: float = 0.05      # per-side taker fee, e.g. 0.05% = 0.0005
-    slippage_pct: float = 0.02  # per-side estimated slippage, e.g. 0.02%
+    spread_usd: float = 15.0            # round-trip spread cost in raw $ — CHECK YOUR LIVE SPREAD
+    commission_usd_per_lot: float = 2.0  # Raw Spread BTCUSDT round-trip; 0.0 if Standard account
     min_sl_atr_multiple: float = 0.5  # never let SL be tighter than this many ATRs
     min_sl_pct: float = 0.15  # SL can never be tighter than this % of entry price
 
