@@ -26,8 +26,8 @@ def simulate_trade(
     stop_loss: float,
     take_profit: float,
     time_column: str = "timestamp",
-    fee_pct: float = 0.0,
-    slippage_pct: float = 0.0,
+    spread_usd: float = 0.0,
+    commission_usd_per_lot: float = 0.0,
 ) -> Optional[TradeResult]:
     """
     Simulate a single trade forward from entry_index (the candle whose
@@ -54,9 +54,7 @@ def simulate_trade(
         raise ValueError("Stop loss distance must be greater than zero.")
 
     # Round-trip cost (entry + exit, both sides) expressed in R terms.
-    round_trip_cost_pct = 2 * (fee_pct + slippage_pct) / 100.0
-    cost_amount = entry_price * round_trip_cost_pct
-    cost_in_r = cost_amount / risk_distance
+    cost_in_r = (spread_usd + commission_usd_per_lot) / risk_distance
 
     for i in range(entry_index, len(df)):
         row = df.iloc[i]
